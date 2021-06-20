@@ -69,7 +69,9 @@ if ($Compiler -eq 'msvc2019') {
 
 ## A multiline commit message containing "=" can interact badly with this
 ## hack to extract the environment from vcvarsall.bat
-Remove-Item env:BUILD_SOURCEVERSIONMESSAGE
+if (Test-Path env:BUILD_SOURCEVERSIONMESSAGE) {
+  Remove-Item env:BUILD_SOURCEVERSIONMESSAGE
+}
 
 # arch for the vcvars script includes the host when cross-compiling
 $vcarch = $env:arch
